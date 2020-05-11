@@ -2,27 +2,16 @@ name: Release
 
 on:
   push:
-    branches: [ master ]
-
+    branches:
+      -  master
 
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: Install Go
-      uses: actions/setup-go@v1
-      with:
-        go-version: ${{ matrix.go-version }}
-
-    - name: Add GOBIN to PATH
-      run: echo "::add-path::$(go env GOPATH)/bin"
-      shell: bash
-
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v2
-
-    - name: Publish Release
-      shell: bash
+    - name: Github Tag Bump
+      uses: anothrNick/github-tag-action@1.22.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: make release-publish
