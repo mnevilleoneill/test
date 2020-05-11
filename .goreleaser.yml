@@ -1,4 +1,4 @@
-project_name: newrelic-azure-functions
+project_name: test
 
 env:
   - GO111MODULE=on
